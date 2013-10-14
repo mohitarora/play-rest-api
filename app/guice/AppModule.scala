@@ -2,7 +2,7 @@ package guice
 
 import com.tzavellas.sse.guice.ScalaModule
 
-class ProdModule extends ScalaModule {
+class AppModule extends ScalaModule {
 
   def configure() {
 
