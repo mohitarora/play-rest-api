@@ -2,6 +2,9 @@ package guice
 
 import com.tzavellas.sse.guice.ScalaModule
 
+/**
+ * Guice Application Module
+ */
 class AppModule extends ScalaModule {
 
   def configure {
@@ -10,6 +13,9 @@ class AppModule extends ScalaModule {
 
 }
 
+/**
+ * Guice Application Module in Development mode
+ */
 class DevModule extends AppModule {
 
   override def configure {

@@ -7,6 +7,9 @@ import play.api.Play.current
 
 object Global extends GlobalSettings {
 
+  /**
+   * Create Guice Injector
+   */
   private lazy val _injector = {
     Play.isProd match {
       case true => Guice.createInjector(new AppModule)
@@ -14,12 +17,23 @@ object Global extends GlobalSettings {
     }
   }
 
+  /**
+   * Initialize Actor System, Actors are initialized via Guice.
+   */
   override def onStart(app: Application): Unit = {
+    // Create Application Akka Actor System
     val _system = Akka.system
+    // Set Guice Injector to Guice Actor Extension
     GuiceExtensionProvider.get(_system).initialize(_injector)
-    _system.actorOf(GuiceExtensionProvider.get(_system).props(classOf[MasterActor]), classOf[MasterActor].getSimpleName);
+    // Create Master Actor, This is a chain reaction because supervisors are responsible for
+    // creating actors that they are supervising
+    _system.actorOf(GuiceExtensionProvider.get(_system).props(classOf[MasterActor]),
+      classOf[MasterActor].getSimpleName);
   }
 
+  /**
+   * This method will return controller from Guice.
+   */
   override def getControllerInstance[A](controllerClass: Class[A]): A = {
     _injector.getInstance(controllerClass)
   }
