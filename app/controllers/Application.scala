@@ -9,7 +9,7 @@ import com.google.inject.{Inject, Singleton}
 class Application @Inject() extends Controller {
 
   def index() = Action {
-    Ok(Json.toJson(new Person("Mohit", 31, true)))
+    Ok(Json.toJson(new Person("XYZ", 21, true)))
   }
 
 }
