@@ -7,7 +7,7 @@ class MasterActor extends BaseActor {
   /**
    * Master Actor will supervise Counting Actor.
    */
-  val countingActor = context.actorOf(extension.props(classOf[CountingActor]), classOf[CountingActor].getSimpleName)
+  val countingActor = actor(classOf[CountingActor])
 
   override def receive: Actor.Receive = {
     case x => // some behavior

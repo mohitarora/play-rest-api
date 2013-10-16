@@ -22,10 +22,10 @@ object Global extends GlobalSettings {
     // Create Application Akka Actor System
     val _system = Akka.system
     // Set Guice Injector to Guice Actor Extension
-    GuiceExtensionProvider.get(_system).initialize(_injector)
+    GuiceExtensionProvider(_system).initialize(_injector)
     // Create Master Actor, This is a chain reaction because supervisors are responsible for
     // creating actors that they are supervising
-    _system.actorOf(GuiceExtensionProvider.get(_system).props(classOf[MasterActor]), classOf[MasterActor].getSimpleName);
+    _system.actorOf(GuiceExtensionProvider(_system).props(classOf[MasterActor]), classOf[MasterActor].getSimpleName)
   }
 
   /**

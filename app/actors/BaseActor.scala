@@ -1,6 +1,6 @@
 package actors
 
-import akka.actor.Actor
+import akka.actor.{ActorRef, Actor}
 import guice.GuiceExtensionProvider
 
 /**
@@ -8,6 +8,14 @@ import guice.GuiceExtensionProvider
  */
 trait BaseActor extends Actor {
 
-  val extension = GuiceExtensionProvider.get(context.system)
+
+  /**
+   * Create an actor that current actor will supervise.
+   * @param actorClass - Actor Class for which actor needs to be created
+   * @return - Actor Reference.
+   */
+  def actor(actorClass: Class[_ <: Actor]): ActorRef = {
+    context.actorOf(GuiceExtensionProvider(context.system).props(actorClass), actorClass.getSimpleName)
+  }
 
 }
