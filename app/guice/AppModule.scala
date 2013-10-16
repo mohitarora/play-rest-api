@@ -1,6 +1,10 @@
 package guice
 
 import com.tzavellas.sse.guice.ScalaModule
+import com.google.inject.Provides
+import akka.actor.ActorSystem
+import play.api.libs.concurrent.Akka
+import play.api.Play.current
 
 /**
  * Guice Application Module
@@ -9,6 +13,8 @@ class AppModule extends ScalaModule {
 
   override def configure {
 
+    @Provides
+    def actorSystem: ActorSystem = Akka.system
   }
 
 }
