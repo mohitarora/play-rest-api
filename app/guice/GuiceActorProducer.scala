@@ -14,8 +14,9 @@ import play.api.Logger
 class GuiceActorProducer(injector: Injector, actorType: Class[Actor]) extends IndirectActorProducer {
 
   override def produce: Actor = {
-    Logger.info("Initializing " + actorType.getSimpleName + " via Guice")
-    injector.getInstance(actorType)
+    val actor: Actor = injector.getInstance(actorType)
+    Logger.info("Initialized Actor " + actorType.getSimpleName + " via Guice and is accessible via " + actor.self.path)
+    actor
   }
 
   override def actorClass: Class[_ <: Actor] = classOf[Actor]
