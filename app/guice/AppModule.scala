@@ -1,6 +1,7 @@
 package guice
 
 import com.tzavellas.sse.guice.ScalaModule
+import com.google.inject.{Provides, Singleton}
 import akka.actor.ActorSystem
 import play.api.libs.concurrent.Akka
 import play.api.Play.current
@@ -11,8 +12,12 @@ import play.api.Play.current
 class AppModule extends ScalaModule {
 
   override def configure {
-    bind(classOf[ActorSystem]).toInstance(Akka.system)
+
   }
+
+  @Provides
+  @Singleton
+  def actorSystem: ActorSystem = Akka.system
 
 }
 
