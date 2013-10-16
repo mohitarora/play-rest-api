@@ -23,15 +23,12 @@ object GuiceExtensionProvider extends ExtensionId[GuiceExtension] with Extension
  */
 class GuiceExtension(system: ExtendedActorSystem) extends Extension {
 
-  private var injector: Injector = null
+  private var injector: Injector = _
 
   /**
    * Used to initialize the Guice Injector for the extension.
-   * @param injector
    */
-  def initialize(injector: Injector) = {
-    this.injector = injector
-  }
+  def initialize(injector: Injector) = this.injector = injector
 
   /**
    * Create a Props for the specified actorType using the GuiceActorProducer class.
@@ -39,9 +36,7 @@ class GuiceExtension(system: ExtendedActorSystem) extends Extension {
    * @param actorType The type of the actor to create Props for
    * @return a Props that will create the typed actor bean using Guice
    */
-  def props(actorType: Type): Props = {
-    Props(classOf[GuiceActorProducer], injector, actorType)
-  }
+  def props(actorType: Type): Props = Props(classOf[GuiceActorProducer], injector, actorType)
 
 }
 

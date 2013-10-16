@@ -10,11 +10,9 @@ object Global extends GlobalSettings {
   /**
    * Create Guice Injector
    */
-  private lazy val _injector = {
-    Play.isProd match {
-      case true => Guice.createInjector(new AppModule)
-      case false => Guice.createInjector(new DevModule)
-    }
+  private lazy val _injector = Play.isProd match {
+    case true => Guice.createInjector(new AppModule)
+    case false => Guice.createInjector(new DevModule)
   }
 
   /**
@@ -27,15 +25,13 @@ object Global extends GlobalSettings {
     GuiceExtensionProvider.get(_system).initialize(_injector)
     // Create Master Actor, This is a chain reaction because supervisors are responsible for
     // creating actors that they are supervising
-    _system.actorOf(GuiceExtensionProvider.get(_system).props(classOf[MasterActor]),
-      classOf[MasterActor].getSimpleName);
+    _system.actorOf(GuiceExtensionProvider.get(_system).props(classOf[MasterActor]), classOf[MasterActor].getSimpleName);
   }
 
   /**
    * This method will return controller from Guice.
    */
-  override def getControllerInstance[A](controllerClass: Class[A]): A = {
-    _injector.getInstance(controllerClass)
-  }
+  override def getControllerInstance[A](controllerClass: Class[A]): A = _injector.getInstance(controllerClass)
+
 
 }
