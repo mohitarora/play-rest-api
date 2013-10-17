@@ -10,7 +10,7 @@ import actors.{MasterActor, ActorRegistry}
 @Singleton
 class Application @Inject()(actorSystem: ActorSystem) extends Controller {
 
-  private val masterActor = actorSystem.actorSelection(ActorRegistry(classOf[MasterActor]))
+  private lazy val masterActor = actorSystem.actorSelection(ActorRegistry(classOf[MasterActor]))
 
   def index() = Action {
     Ok(Json.toJson(new Person(masterActor.toString(), 21, true)))
