@@ -3,6 +3,7 @@ package guice
 import akka.actor.{Actor, IndirectActorProducer}
 import com.google.inject.Injector
 import play.api.Logger
+import actors.ActorRegistry
 
 /**
  *
@@ -15,10 +16,12 @@ class GuiceActorProducer(injector: Injector, actorType: Class[Actor]) extends In
 
   override def produce: Actor = {
     val actor: Actor = injector.getInstance(actorType)
-    Logger.info("Initialized Actor " + actorType.getSimpleName + " via Guice and is accessible via " + actor.self.path)
+    Logger.info("Initialized Actor " + actor.self.path + " via Guice")
+    // Add an entry to Actor Registry
+    ActorRegistry.registry(actorClass) = actor.self.path.toString
     actor
   }
 
-  override def actorClass: Class[_ <: Actor] = classOf[Actor]
+  override def actorClass: Class[_ <: Actor] = actorType
 
 }
