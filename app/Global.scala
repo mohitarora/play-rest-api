@@ -1,9 +1,9 @@
-import actors.MasterActor
-import com.google.inject.Guice
-import guice.{GuiceExtensionProvider, DevModule, AppModule}
 import play.api.libs.concurrent.Akka
 import play.api.{Application, Play, GlobalSettings}
 import play.api.Play.current
+import com.google.inject.Guice
+import actors.MasterActor
+import guice.{GuiceExtensionProvider, DevModule, AppModule}
 
 object Global extends GlobalSettings {
 

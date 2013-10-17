@@ -1,16 +1,16 @@
 package controllers
 
 import play.api.mvc._
-import models.Person
 import play.api.libs.json.Json
-import com.google.inject.Singleton
-import actors.{GetCount, Count, MasterActor, ActorRegistry}
-import akka.util.Timeout
-import scala.concurrent.duration._
-import akka.pattern.ask
 import play.api.libs.concurrent.Execution.Implicits._
 import play.api.libs.concurrent.Akka
 import play.api.Play.current
+import akka.util.Timeout
+import akka.pattern.ask
+import scala.concurrent.duration._
+import com.google.inject.Singleton
+import models.Person
+import actors.{GetCount, Count, MasterActor, ActorRegistry}
 
 @Singleton
 class Application extends Controller {

@@ -1,8 +1,8 @@
 package guice
 
-import akka.actor.{Actor, IndirectActorProducer}
-import com.google.inject.Injector
 import play.api.Logger
+import com.google.inject.Injector
+import akka.actor.{Actor, IndirectActorProducer}
 import actors.ActorRegistry
 
 /**
