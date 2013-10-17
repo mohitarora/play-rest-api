@@ -25,7 +25,8 @@ class Application @Inject()(actorSystem: ActorSystem) extends Controller {
     val future = (masterActor ? new GetCount).mapTo[Int]
     // map method on casted future will return Future[Result] Future[Result] will eventually be redeemed with a value
     // of type Result. By giving a Future[Result] instead of normal Result we are able to quickly generate the result
-    // without blocking. Play will serve the result as soon as promise is redeemed.
+    // without blocking. Play will serve the result as soon as promise is redeemed. Read about Promises if further
+    // information is required.
     future.map {
       response => Ok(Json.toJson(new Person("Mohit", response, true)))
     }
