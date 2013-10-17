@@ -3,20 +3,21 @@ package controllers
 import play.api.mvc._
 import models.Person
 import play.api.libs.json.Json
-import com.google.inject.{Inject, Singleton}
-import akka.actor.ActorSystem
+import com.google.inject.Singleton
 import actors.{GetCount, Count, MasterActor, ActorRegistry}
 import akka.util.Timeout
 import scala.concurrent.duration._
 import akka.pattern.ask
 import play.api.libs.concurrent.Execution.Implicits._
+import play.api.libs.concurrent.Akka
+import play.api.Play.current
 
 @Singleton
-class Application @Inject()(actorSystem: ActorSystem) extends Controller {
+class Application extends Controller {
 
   implicit val timeout = Timeout(5 seconds) //enabled by duration._ import
 
-  private lazy val masterActor = actorSystem.actorSelection(ActorRegistry(classOf[MasterActor]))
+  private lazy val masterActor = Akka.system.actorSelection(ActorRegistry(classOf[MasterActor]))
 
   def index = Action.async {
     masterActor ! new Count

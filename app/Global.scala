@@ -1,7 +1,7 @@
 import actors.MasterActor
-import akka.actor.ActorSystem
 import com.google.inject.Guice
 import guice.{GuiceExtensionProvider, DevModule, AppModule}
+import play.api.libs.concurrent.Akka
 import play.api.{Application, Play, GlobalSettings}
 import play.api.Play.current
 
@@ -19,7 +19,7 @@ object Global extends GlobalSettings {
    * Initialize Actor System, Actors are initialized via Guice.
    */
   override def onStart(app: Application): Unit = {
-    val _system = _injector.getInstance(classOf[ActorSystem])
+    val _system = Akka.system
     // Set Guice Injector to Guice Actor Extension
     GuiceExtensionProvider(_system).initialize(_injector)
     // Create Master Actor, This is a chain reaction because supervisors are responsible for
