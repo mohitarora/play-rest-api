@@ -16,7 +16,7 @@ class GuiceActorProducer(injector: Injector, actorType: Class[Actor]) extends In
 
   override def produce: Actor = {
     val actor: Actor = injector.getInstance(actorType)
-    Logger.info("Initialized Actor " + actor.self.path + " via Guice")
+    Logger.info(s"Initialized Actor $actor.self.path via Guice")
     // Add an entry to Actor Registry
     ActorRegistry.registry(actorClass) = actor.self.path
     actor
