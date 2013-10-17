@@ -1,6 +1,6 @@
 package actors
 
-import akka.actor.Actor
+import akka.actor.{ActorPath, Actor}
 import scala.Predef._
 
 /**
@@ -10,8 +10,8 @@ import scala.Predef._
 object ActorRegistry {
 
   //Mutable map to add actor class mapping to actor path
-  val registry = scala.collection.mutable.Map[Class[_ <: Actor], String]()
+  val registry = scala.collection.mutable.Map[Class[_ <: Actor], ActorPath]()
 
-  def apply(actorClass: Class[_ <: Actor]): String = registry(actorClass)
+  def apply(actorClass: Class[_ <: Actor]): ActorPath = registry(actorClass)
 
 }

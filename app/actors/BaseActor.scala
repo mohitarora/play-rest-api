@@ -14,8 +14,7 @@ trait BaseActor extends Actor {
    * @param actorClass - Actor Class for which actor needs to be created
    * @return - Actor Reference.
    */
-  def actor(actorClass: Class[_ <: Actor]): ActorRef = {
+  def actor(actorClass: Class[_ <: Actor]): ActorRef =
     context.actorOf(GuiceExtensionProvider(context.system).props(actorClass), actorClass.getSimpleName)
-  }
 
 }

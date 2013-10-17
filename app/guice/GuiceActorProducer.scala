@@ -18,7 +18,7 @@ class GuiceActorProducer(injector: Injector, actorType: Class[Actor]) extends In
     val actor: Actor = injector.getInstance(actorType)
     Logger.info("Initialized Actor " + actor.self.path + " via Guice")
     // Add an entry to Actor Registry
-    ActorRegistry.registry(actorClass) = actor.self.path.toString
+    ActorRegistry.registry(actorClass) = actor.self.path
     actor
   }
 
