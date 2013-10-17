@@ -1,12 +1,12 @@
 package actors
 
-import akka.actor.{ActorRef, Actor}
+import akka.actor.{ActorLogging, ActorRef, Actor}
 import guice.GuiceExtensionProvider
 
 /**
  * Base Actor for any common behaviour.
  */
-trait BaseActor extends Actor {
+trait BaseActor extends Actor with ActorLogging{
 
 
   /**
