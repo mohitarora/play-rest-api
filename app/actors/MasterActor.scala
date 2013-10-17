@@ -10,7 +10,9 @@ class MasterActor extends BaseActor {
   val countingActor = actor(classOf[CountingActor])
 
   override def receive: Actor.Receive = {
-    case x => // some behavior
+    case count: Count => countingActor.forward(count)
+    case getCount: GetCount => countingActor.forward(getCount)
+    case _ => unhandled()
   }
 
 }

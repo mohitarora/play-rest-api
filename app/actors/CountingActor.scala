@@ -1,11 +1,21 @@
 package actors
 
 import akka.actor.Actor
+import com.google.inject.Inject
+import service.CountingService
 
-class CountingActor extends BaseActor {
+class CountingActor @Inject()(countingService: CountingService) extends BaseActor {
+
+  private var counter = 0
 
   def receive: Actor.Receive = {
-    case x => // some behavior
+    case count: Count => counter = countingService.increment(counter)
+    case getCount: GetCount => sender ! counter
+    case _ => unhandled()
   }
 
 }
+
+class Count
+
+class GetCount
