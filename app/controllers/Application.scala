@@ -9,8 +9,7 @@ import actors.{GetCount, Count, MasterActor, ActorRegistry}
 import akka.util.Timeout
 import scala.concurrent.duration._
 import akka.pattern.ask
-import scala.concurrent.ExecutionContext
-import ExecutionContext.Implicits.global
+import play.api.libs.concurrent.Execution.Implicits._
 
 @Singleton
 class Application @Inject()(actorSystem: ActorSystem) extends Controller {
