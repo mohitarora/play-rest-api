@@ -6,6 +6,7 @@ import scala.Predef._
 /**
  * This object will be used to map actor class to actor path in system so that it can be retrieved easily based on
  * actor class. ActorRegistry can be used in akka actors or play controllers to locate akka actors.
+ * Sample usage: actorSystem.actorSelection(ActorRegistry(classOf[MasterActor]))
  */
 object ActorRegistry {
 
