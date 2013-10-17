@@ -1,6 +1,7 @@
 package actors
 
 import akka.actor.Actor
+import scala.Predef._
 
 /**
  * This object will be used to map actor class to actor path in system so that it can be retrieved easily based on
@@ -10,5 +11,7 @@ object ActorRegistry {
 
   //Mutable map to add actor class mapping to actor path
   val registry = scala.collection.mutable.Map[Class[_ <: Actor], String]()
+
+  def apply(actorClass: Class[_ <: Actor]): String = registry(actorClass)
 
 }
