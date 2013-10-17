@@ -13,7 +13,9 @@ import scala.Predef._
 object ActorRegistry {
 
   //Mutable map to add actor class mapping to actor path
-  val registry = scala.collection.mutable.Map[Class[_ <: Actor], ActorPath]()
+  private val _registry = scala.collection.mutable.Map[Class[_ <: Actor], ActorPath]()
+
+  def registry = _registry
 
   def apply(actorClass: Class[_ <: Actor]): ActorPath = registry(actorClass)
 
