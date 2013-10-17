@@ -11,7 +11,6 @@ class CountingActor @Inject()(countingService: CountingService) extends BaseActo
   def receive: Actor.Receive = {
     case count: Count => counter = countingService.increment(counter)
     case getCount: GetCount => sender ! counter
-    case _ => unhandled()
   }
 
 }

@@ -12,7 +12,6 @@ class MasterActor extends BaseActor {
   override def receive: Actor.Receive = {
     case count: Count => countingActor.forward(count)
     case getCount: GetCount => countingActor.forward(getCount)
-    case _ => unhandled()
   }
 
 }
