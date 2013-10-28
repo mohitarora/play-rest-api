@@ -6,7 +6,7 @@ import guice.GuiceExtensionProvider
 /**
  * Base Actor for any common behaviour.
  */
-trait BaseActor extends Actor with ActorLogging{
+trait BaseActor extends Actor with ActorLogging {
 
 
   /**
@@ -14,7 +14,7 @@ trait BaseActor extends Actor with ActorLogging{
    * @param actorClass - Actor Class for which actor needs to be created
    * @return - Actor Reference.
    */
-  def actor(actorClass: Class[_ <: Actor]): ActorRef =
+  protected def actor(actorClass: Class[_ <: Actor]): ActorRef =
     context.actorOf(GuiceExtensionProvider(context.system).props(actorClass), actorClass.getSimpleName)
 
 }
