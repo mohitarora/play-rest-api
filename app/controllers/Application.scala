@@ -20,10 +20,10 @@ class Application extends Controller {
   private lazy val masterActor = Akka.system.actorSelection(ActorRegistry(classOf[MasterActor]))
 
   def index = Action.async {
-    masterActor ! new Count
+    masterActor ! Count
     // Future Returned by actor is Future[Any] because actor is dynamic, mapTo method will return a new casted Future
     // if cast is successful or a ClassCastException if not.
-    val future = (masterActor ? new GetCount).mapTo[Int]
+    val future = (masterActor ? GetCount).mapTo[Int]
     // map method on casted future will return Future[Result] Future[Result] will eventually be redeemed with a value
     // of type Result. By giving a Future[Result] instead of normal Result we are able to quickly generate the result
     // without blocking. Play will serve the result as soon as promise is redeemed. Read about Promises if further

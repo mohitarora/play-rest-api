@@ -9,12 +9,12 @@ class CountingActor @Inject()(countingService: CountingService) extends BaseActo
   private var counter = 0
 
   def receive: Actor.Receive = {
-    case count: Count => counter = countingService.increment(counter)
-    case getCount: GetCount => sender ! counter
+    case Count => counter = countingService.increment(counter)
+    case GetCount => sender ! counter
   }
 
 }
 
-class Count
+case object Count
 
-class GetCount
+case object GetCount
