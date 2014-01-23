@@ -17,7 +17,7 @@ class Application extends Controller {
 
   implicit val timeout = Timeout(5 seconds) //enabled by duration._ import
 
-  private lazy val masterActor = Akka.system.actorSelection("akka://application/user/MasterActor")
+  private lazy val masterActor = Akka.system.actorSelection("/user/MasterActor")
 
   def index = Action.async {
     masterActor ! Count
