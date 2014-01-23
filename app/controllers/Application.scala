@@ -10,14 +10,14 @@ import akka.pattern.ask
 import scala.concurrent.duration._
 import com.google.inject.Singleton
 import models.Person
-import actors.{GetCount, Count, MasterActor, ActorRegistry}
+import actors.{GetCount, Count}
 
 @Singleton
 class Application extends Controller {
 
   implicit val timeout = Timeout(5 seconds) //enabled by duration._ import
 
-  private lazy val masterActor = Akka.system.actorSelection(ActorRegistry(classOf[MasterActor]))
+  private lazy val masterActor = Akka.system.actorSelection("akka://application/user/MasterActor")
 
   def index = Action.async {
     masterActor ! Count

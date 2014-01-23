@@ -7,7 +7,7 @@ class MasterActor extends Actor with ActorLogging with BaseActor {
   /**
    * Master Actor will supervise Counting Actor.
    */
-  val countingActor = actor(classOf[CountingActor])
+  val countingActor = actor(classOf[CountingActor], classOf[CountingActor].getSimpleName)
 
   override def receive: Actor.Receive = {
     case Count => countingActor.forward(Count)
