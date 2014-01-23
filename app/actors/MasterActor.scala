@@ -1,8 +1,8 @@
 package actors
 
-import akka.actor.Actor
+import akka.actor.{ActorLogging, Actor}
 
-class MasterActor extends BaseActor {
+class MasterActor extends Actor with ActorLogging with BaseActor {
 
   /**
    * Master Actor will supervise Counting Actor.

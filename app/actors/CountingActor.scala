@@ -1,10 +1,10 @@
 package actors
 
-import akka.actor.Actor
+import akka.actor.{ActorLogging, Actor}
 import com.google.inject.Inject
 import service.CountingService
 
-class CountingActor @Inject()(countingService: CountingService) extends BaseActor {
+class CountingActor @Inject()(countingService: CountingService) extends Actor with ActorLogging with BaseActor {
 
   private var counter = 0
 
