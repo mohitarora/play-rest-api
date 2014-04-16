@@ -7,7 +7,7 @@ object PingPong extends App {
   class PingPongActor extends Actor with ActorLogging {
 
     var count = 0
-    
+
     val name = self.path.name
 
     override def receive: Receive = {
